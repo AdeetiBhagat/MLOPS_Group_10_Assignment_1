@@ -1,1 +1,38 @@
+name: CI/CD Pipeline
+
+on: [push, pull_request]
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.8'
+    - name: Install dependencies
+      run: pip install flake8
+    - name: Run Linter
+      run: flake8 .
+
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.8'
+    - name: Install dependencies
+      run: pip install -r requirements.txt
+    - name: Run Tests
+      run: python -m unittest discover tests
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: test
+    steps:
+    - name: Deploy the model
+      run: echo "Deploying model..."
 
