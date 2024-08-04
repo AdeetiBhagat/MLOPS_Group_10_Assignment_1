@@ -41,7 +41,7 @@ sns.set(style="whitegrid")
 ```
 """
 
-# Load the dataset-Different code for Colab
+# Load the dataset-Different code for Colab done
 if IN_COLAB:
   insurance_dataset = files.upload()
   # Get the file name
